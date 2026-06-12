@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: jarvis-orchestrator
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python jarvis_orchestrator.py
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+        
