@@ -83,9 +83,8 @@ async def main():
     print(f"💻 Agent ID: {agent.agent_id}")
     
     # Test avec un orchestrateur local (Phase 1)
-    local_url = "ws://localhost:8000"
-    await agent.connect_to_orchestrator(local_url)
-
+    local_url = "https://jarvis-e4xu.onrender.com/"
+    await agent.connect_to_orchestrator(cloud_url)
 if __name__ == "__main__":
     try:
         asyncio.run(main())
