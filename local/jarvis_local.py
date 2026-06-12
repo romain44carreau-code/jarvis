@@ -83,7 +83,8 @@ async def main():
     print(f"💻 Agent ID: {agent.agent_id}")
     
     # Test avec un orchestrateur local (Phase 1)
-    local_url = "https://jarvis-e4xu.onrender.com/"
+    # Connexion à JARVIS dans le cloud
+    cloud_url = "wss://jarvis-e4xu.onrender.com"
     await agent.connect_to_orchestrator(cloud_url)
 if __name__ == "__main__":
     try:

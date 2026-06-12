@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Interface de Contrôle</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1><i class="fas fa-robot"></i> JARVIS</h1>
+            <span class="status-indicator" id="connectionStatus">
+                <i class="fas fa-circle"></i> Hors ligne
+            </span>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="btn-icon" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#chat" class="nav-item" data-section="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat</span>
+                </a>
+                <a href="#agents" class="nav-item" data-section="agents">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Agents</span>
+                </a>
+                <a href="#logs" class="nav-item" data-section="logs">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Logs</span>
+                </a>
+                <a href="#system" class="nav-item" data-section="system">
+                    <i class="fas fa-desktop"></i>
+                    <span>Système</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-grid" id="dashboardGrid">
+                    <!-- Widget: Quick Chat -->
+                    <div class="widget chat-widget" data-widget="chat">
+                        <div class="widget-header">
+                            <h3><i class="fas fa-comments"></i> Chat Rapide</h3>
+                            <button class="widget-toggle"><i class="fas fa-chevron-up"></i></button>
+                        </div>
+                        <div class="widget-content">
+                            <div class="quick-chat">
+                                <div class="chat-messages" id="quickChatMessages"></div>
+                                <div class="chat-input-container">
+                                    <input type="text" id="quickChatInput" placeholder="Tapez votre commande...">
+                                    <button id="quickChatSend"><i class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget: System Status -->
+                    <div class="widget system-widget" data-widget="system">
+                        <div class="widget-header">
+                            <h3><i class="fas fa-desktop"></i> Système</h3>
+                            <button class="widget-toggle"><i class="fas fa-chevron-up"></i></button>
+                        </div>
+                        <div class="widget-content">
+                            <div class="system-metrics">
+                                <div class="metric">
+                                    <label>CPU</label>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="cpuProgress"></div>
+                                    </div>
+                                    <span id="cpuValue">--</span>
+                                </div>
+                                <div class="metric">
+                                    <label>RAM</label>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="ramProgress"></div>
+                                    </div>
+                                    <span id="ramValue">--</span>
+                                </div>
+                                <div class="metric">
+                                    <label>Disque</label>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="diskProgress"></div>
+                                    </div>
+                                    <span id="diskValue">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget: Agents Status -->
+                    <div class="widget agents-widget" data-widget="agents">
+                        <div class="widget-header">
+                            <h3><i class="fas fa-users-cog"></i> Agents</h3>
+                            <button class="widget-toggle"><i class="fas fa-chevron-up"></i></button>
+                        </div>
+                        <div class="widget-content">
+                            <div class="agents-list" id="agentsList">
+                                <div class="agent-item">
+                                    <div class="agent-info">
+                                        <span class="agent-name">Local Agent</span>
+                                        <span class="agent-type">Windows PC</span>
+                                    </div>
+                                    <div class="agent-status offline">
+                                        <i class="fas fa-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget: Recent Logs -->
+                    <div class="widget logs-widget" data-widget="logs">
+                        <div class="widget-header">
+                            <h3><i class="fas fa-list-alt"></i> Logs Récents</h3>
+                            <button class="widget-toggle"><i class="fas fa-chevron-up"></i></button>
+                        </div>
+                        <div class="widget-content">
+                            <div class="logs-container" id="recentLogs">
+                                <div class="log-item">
+                                    <span class="log-time">--:--</span>
+                                    <span class="log-message">En attente de connexion...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="chat" class="content-section">
+                <div class="full-chat">
+                    <div class="chat-header">
+                        <h2>💬 Chat avec JARVIS</h2>
+                    </div>
+                    <div class="chat-messages-full" id="fullChatMessages"></div>
+                    <div class="chat-input-full">
+                        <input type="text" id="fullChatInput" placeholder="Discutez avec JARVIS...">
+                        <button id="fullChatSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections will be added later -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
